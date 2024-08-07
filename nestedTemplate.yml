@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Resources:
+  DDBTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      TableName: 'TestTable'
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+Outputs:
+  TableName:
+    Description: "The name of the DynamoDB table"
+    Value: !Ref DDBTable
+    Export:
+      Name: !Sub "${AWS::StackName}-TableName"
